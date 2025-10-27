@@ -1,0 +1,38 @@
+# Stage 1: Build the application
+FROM node:20-slim AS build
+
+# Set the working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json for installing dependencies
+COPY package*.json ./
+
+# Install Angular CLI globally
+RUN npm install -g @angular/cli
+
+# Install application dependencies
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Build the application in dev mode (ensure `build:dev` is a valid script in your package.json)
+RUN npm run build:dev  # Ensure this matches the script name in your package.json
+
+# Stage 2: Serve the built application using http-server
+FROM node:20-slim AS production
+
+# Set the working directory for serving the app
+WORKDIR /app
+
+# Install http-server to serve static files
+RUN npm install -g http-server
+
+# Copy the build output from the build stage
+COPY --from=build /app/dist/ ./dist
+
+# Expose the port the app will run on
+EXPOSE 4200
+
+# Command to start serving the built Angular app (adjust path to match the actual output directory)
+CMD ["http-server", "dist/audit-framework/browser", "-p", "4200"]
