@@ -1,0 +1,37 @@
+<div [ngSwitch]="type">
+  
+  <div *ngSwitchCase="'text'" class="mb-1">
+    <label [for]="id" class="form-label">{{ label }}</label>
+    <input 
+      [type]="type"
+      class="form-control"
+      [id]="id"
+      [(ngModel)]="value"
+      [placeholder]="placeholder"
+      (ngModelChange)="onValueChange(value)" />
+  </div>
+
+  <div *ngSwitchCase="'textarea'" class="mb-1">
+    <label [for]="id" class="form-label">{{ label }}</label>
+    <textarea 
+      class="form-control"
+      [id]="id"
+      [(ngModel)]="value"
+      [placeholder]="placeholder"
+      rows="3"
+      (ngModelChange)="onValueChange(value)"></textarea>
+  </div>
+
+  <div *ngSwitchCase="'dropdown'" class="mb-1">
+    <label [for]="id" class="form-label">{{ label }}</label>
+    <select 
+      class="form-select"
+      [id]="id"
+      [(ngModel)]="value"
+      (ngModelChange)="onValueChange(value)">
+      <option value="" disabled selected>{{ placeholder }}</option>
+      <option *ngFor="let option of options" [ngValue]="option.value">{{ option.label }}</option>
+    </select>
+  </div>
+
+</div>

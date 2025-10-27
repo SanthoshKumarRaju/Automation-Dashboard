@@ -1,0 +1,46 @@
+<div class="input-group">
+  <ng-template #popContent>
+    <div class="container datetime-container">
+      <div class="row">
+        <div class="col-md-6 date-time-label">Start Date Time:</div>
+        <div class="col-md-6 date-time-label">End Date Time:</div>
+        <div class="col-md-6 time-container">
+          <ngb-datepicker #fromDP [(ngModel)]="fromDate" [maxDate]="maxDate" [minDate]="minDate" [displayMonths]="1" 
+            outsideDays="hidden">
+          </ngb-datepicker>
+          <!-- Time picker for start -->
+          <ngb-timepicker #fromTP [(ngModel)]="startTime" [spinners]="true" [seconds]="true" [meridian]="false"
+            (ngModelChange)="updateDateTimeDisplay()">
+          </ngb-timepicker>
+        </div>
+        <div class="col-md-6 time-container">
+          <ngb-datepicker #toDP [(ngModel)]="toDate" [maxDate]="maxDate" [minDate]="minDate" [displayMonths]="1"  
+            outsideDays="hidden">
+          </ngb-datepicker>
+          <ngb-timepicker #toTP [(ngModel)]="endTime" [spinners]="true" [seconds]="true" [meridian]="false"
+            (ngModelChange)="updateDateTimeDisplay()">
+          </ngb-timepicker>
+        </div>
+        <div class="col-md-12 actions">
+          <button class="btn btn-outline-secondary" (click)="cancel()">
+            <mat-icon>close</mat-icon>
+          </button>
+          <button  class="btn btn-outline-primary" (click)="ok()" color="primary" cdkFocusInitial>
+            <mat-icon>done</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <button type="button" class="btn btn-date-selector" placement="bottom-left" [ngbPopover]="popContent"
+    [autoClose]="'outside'" data-container="body" #popOver="ngbPopover">
+    <!-- {{fromDate?.month}}/{{fromDate?.day}}/{{fromDate?.year}} {{("0" + this.fromTime.getHours()).slice(-2)}}:{{("0" + fromTime.getMinutes()).slice(-2)}}:{{("0" + fromTime.getSeconds()).slice(-2)}} -
+    {{toDate?.month}}/{{toDate?.day}}/{{toDate?.year}} {{("0" + toTime.getHours()).slice(-2)}}:{{("0" + toTime.getMinutes()).slice(-2)}}:{{("0" + toTime.getSeconds()).slice(-2)}} -->
+    {{fromDate?.month}}/{{fromDate?.day}}/{{fromDate?.year}}
+    {{("0" + (startTime?.hour || 0)).slice(-2)}}:{{("0" + (startTime?.minute || 0)).slice(-2)}}:{{("0" +
+    (startTime?.second || 0)).slice(-2)}} -
+    {{toDate?.month}}/{{toDate?.day}}/{{toDate?.year}}
+    {{("0" + (endTime?.hour || 0)).slice(-2)}}:{{("0" + (endTime?.minute || 0)).slice(-2)}}:{{("0" + (endTime?.second ||
+    0)).slice(-2)}}
+  </button>
+</div>

@@ -1,0 +1,62 @@
+* {
+  -webkit-transition: margin-left 0.2s ease-in-out;
+  -moz-transition: margin-left 0.2s ease-in-out;
+  -ms-transition: margin-left 0.2s ease-in-out;
+  -o-transition: margin-left 0.2s ease-in-out;
+  transition: margin-left 0.2s ease-in-out;
+}
+
+/* Main Wrapper: Use flexbox to create the layout */
+.main-wrapper {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+}
+
+/* Sidenav Component (app-sidenav) */
+app-sidenav {
+  width: 250px; /* Set width of the sidenav */
+  background-color: #333; /* Sidebar background color */
+  color: white; /* Text color */
+  height: 100vh; /* Full height */
+  position: fixed; /* Fixed on the left side */
+  top: 0;
+  left: 0;
+}
+
+/* Main content area */
+.main-content {
+  // margin-left: 250px; /* Push content to the right to make space for the sidenav */
+  flex: 1; /* Takes the remaining space */
+  padding: 20px;
+  overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+.stick-main-content {
+  height: 100%;
+}
+
+/* Optional: Customize the sidenav links */
+app-sidenav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+app-sidenav ul li {
+  margin-bottom: 20px;
+}
+
+app-sidenav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  display: block;
+  padding: 10px;
+  transition: background-color 0.3s;
+}
+
+app-sidenav ul li a:hover {
+  background-color: #555; /* Highlight on hover */
+}
+
+
+

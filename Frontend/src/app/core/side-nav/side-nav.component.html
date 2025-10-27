@@ -1,0 +1,28 @@
+<nav id="sidebar" class="d-flex flex-column p-3">
+  <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" [routerLink]="['/']">
+    <span class="fs-8">Support Dashboard</span>
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a class="nav-link text-white" [routerLink]="['/store-locations']" routerLinkActive="active">
+        View Store Locations
+      </a>
+    </li>
+    <li>
+      <a class="nav-link text-white" [routerLink]="['/store-users']" routerLinkActive="active">
+        View Store Users
+      </a>
+    </li>
+    <li>
+      <a class="nav-link text-white" [routerLink]="['/audit-framework']" routerLinkActive="active">
+        Audit
+      </a>
+    </li>
+  </ul>
+  <hr>
+  <a class="nav-link text-white" (click)="logout()">
+    Logout
+  </a>
+</nav>
+

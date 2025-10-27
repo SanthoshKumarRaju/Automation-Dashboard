@@ -1,0 +1,35 @@
+<div class="dashboard-box d-flex flex-column p-3 mb-3" style="height: 100vh;">
+  <div class="row align-items-center justify-content-between mb-3">
+    <div class="col-12 col-md-auto mb-md-0">
+      <span class="number-tag ms-2 fw-bold text-primary">
+        Total Records: {{total_count}}
+      </span>
+    </div>
+
+    <div class="col-12 col-md-auto d-flex align-items-center">
+      <button class="btn btn-link p-0 me-3" (click)="refreshData()" style="font-size: 1.6em; line-height: 1;">
+        <i class="fa fa-refresh text-primary"></i>
+      </button>
+
+      <button class="btn btn-primary" (click)="onBtnExport()">Export to CSV</button>
+    </div>
+  </div>
+
+  <!-- Grid wrapper -->
+  <div class="flex-grow-1" style="min-height: 0;">
+    <ag-grid-angular
+      class="ag-theme-alpine colorful-grid"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef"
+      [theme]="bt_theme"
+      rowSelection="single"
+      style="width: 100%; height: 100%;"
+      (gridReady)="onGridReady($event)">
+    </ag-grid-angular>
+  </div>
+
+  <div *ngIf="!isBrowser">
+    <p>Content to display during server-side rendering...</p>
+  </div>
+</div>

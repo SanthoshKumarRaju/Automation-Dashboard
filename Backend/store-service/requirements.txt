@@ -1,0 +1,35 @@
+# FastAPI Ecosystem
+fastapi==0.104.1
+uvicorn==0.24.0
+python-multipart==0.0.6
+
+# Database
+SQLAlchemy==2.0.23
+pyodbc==5.1.0
+
+# Data Processing
+pandas==2.0.3
+numpy==1.24.4
+openpyxl==3.1.2
+
+# Authentication & Security
+python-jose[cryptography]==3.3.0
+python-dotenv==1.0.0
+passlib[bcrypt]==1.7.4
+bcrypt==4.0.1
+cryptography==41.0.7
+
+# JWT Token Handling
+PyJWT==2.8.0
+
+# Settings Management
+pydantic==2.7.4
+pydantic-settings==2.4.0
+
+# Utilities
+typing-extensions==4.8.0
+python-dateutil==2.8.2
+pytz==2023.3
+
+# HTTP Client
+requests==2.31.0

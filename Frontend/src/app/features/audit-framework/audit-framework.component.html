@@ -1,0 +1,90 @@
+<div id="accordion">
+  <div class="card shadow-sm">
+    <div class="card-header" id="headingOne" (click)="toggleCollapse()">
+      <h4 class="mb-0 d-flex justify-content-between align-items-center">
+        <button class="btn btn-link">
+          Advance Search
+        </button>
+        <i class="bi" style="font-size: 20px; color: #0D6EFD;"
+          [ngClass]="{'bi-chevron-down': !isCollapsed, 'bi-chevron-up': isCollapsed}"></i>
+      </h4>
+    </div>
+    <div id="collapseOne" class="collapse" [ngClass]="{'show': !isCollapsed}">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="dateTimeRange" class="form-label">Date Time Range</label>
+            <div class="sales-dash w-100">
+              <app-datetimerangepicker id="dateTimeRange" [openPopover]="openPopover" [maxDate]="maxDate"
+                [minDate]="minDate" [selectedDateTimeRange]="selectedDateTimeRange"
+                (dateTimeRangeSelected)="dateTimeRangeChange($event)">
+              </app-datetimerangepicker>
+            </div>
+          </div>
+          <div *ngFor="let field of inputFields" class="mb-3" [ngClass]="{
+       'col-md-2': field.id === 'user',
+       'col-md-3': field.id !== 'user'
+     }">
+            <app-input-field [label]="field.label" [id]="field.id" [placeholder]="field.placeholder"
+              (valueChange)="field.id === 'functionality' ? onFuntionalityChange($event) : (field.id === 'companyId' ? onCompanyChange($event) : null)"
+              [(value)]="field.value" [type]="field.type || 'text'" [options]="field.options || []">
+            </app-input-field>
+          </div>
+          <div class="col-md-4 d-flex align-items-center">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="check" [(ngModel)]="searchOlderThan90Days"
+                (ngModelChange)="onCheckboxChange()" />
+              <label class="form-check-label" for="check">
+                Search Audits older than 90 Days
+              </label>
+            </div>
+          </div>
+          <div class="col-md-8 d-flex justify-content-end gap-2">
+            <button class="btn btn-primary btn-sm" (click)="onSearch()">Search</button>
+            <button class="btn btn-secondary btn-sm" (click)="onReset()">Reset</button>
+            <button class="btn btn-success btn-sm" (click)="onExport()" [disabled]="!hasData">Export</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isBrowser" style="width: 100%;  margin-top: 20px;" [style.height]="rowData && rowData.length > 0 ? '100vh' : '150px'" class="ag-theme-quartz">
+  <ag-grid-angular class="ag-theme-quartz" style="width: 100%; height: 100%;" [rowData]="rowData"
+    [gridOptions]="gridOptions" [columnDefs]="columnDefs" [rowHeight]="40" [headerHeight]="50"
+    [defaultColDef]="defaultColDef" [pagination]="true" [paginationPageSize]="500"
+    [paginationPageSizeSelector]="[500, 1000]">
+  </ag-grid-angular>
+
+  <!-- Popup -->
+  <div class="modal fade show" tabindex="-1" role="dialog" [ngStyle]="{ display: showPopup ? 'block' : 'none' }">
+    <div [ngClass]="modalSizeClass" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Data</h5>
+          <button type="button" class="btn-close" (click)="closePopup()"></button>
+        </div>
+        <div class="modal-body">
+          <pre>{{ selectedAdditionalData | json }}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="!isBrowser">
+</div>
+
+<div class="row">
+  <div class="col-sm-6 mb-3 mb-sm-0">
+    <div data-coreui-footer="true" data-coreui-locale="en-US" data-coreui-toggle="date-range-picker">
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div data-coreui-start-date="2022/08/03" data-coreui-end-date="2022/09/17" data-coreui-footer="true"
+      data-coreui-locale="en-US" data-coreui-toggle="date-range-picker">
+    </div>
+  </div>
+</div>
